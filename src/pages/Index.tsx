@@ -1,143 +1,305 @@
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
+import React from 'react';
 
-const navItems = [
-  { label: 'Главная', icon: 'House' },
-  { label: 'Услуги', icon: 'Stethoscope' },
-  { label: 'Врачи', icon: 'UserRound' },
-  { label: 'Стоматология', icon: 'Smile' },
-  { label: 'Программы здоровья', icon: 'HeartPulse' },
-  { label: 'Акции', icon: 'Gift' },
-  { label: 'Контакты', icon: 'MapPin' },
-];
+const Block = ({ className = '' }: { className?: string }) => (
+  <div className={`bg-[#2d3748] rounded ${className}`} />
+);
 
-const features = [
-  {
-    icon: 'Award',
-    title: 'Опытные врачи',
-    text: 'Специалисты высшей категории с многолетним стажем работы.',
-  },
-  {
-    icon: 'Microscope',
-    title: 'Современное оборудование',
-    text: 'Диагностика и лечение на технике европейского уровня.',
-  },
-  {
-    icon: 'Clock',
-    title: 'Без очередей',
-    text: 'Приём строго по записи в удобное для вас время.',
-  },
-  {
-    icon: 'ShieldCheck',
-    title: 'Гарантия качества',
-    text: 'Прозрачные цены и ответственность за результат лечения.',
-  },
-];
+const TextLine = ({ w = 'w-full', h = 'h-2.5' }: { w?: string; h?: string }) => (
+  <div className={`${w} ${h} bg-[#cfd5de] rounded`} />
+);
+
+const ImageBox = ({ className = '' }: { className?: string }) => (
+  <div className={`bg-[#3d4a5c] rounded flex items-center justify-center ${className}`}>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="#6b7a8d" strokeWidth="1.5" />
+      <circle cx="8.5" cy="8.5" r="1.5" fill="#6b7a8d" />
+      <path d="M3 16l5-5 4 4 3-3 6 6" stroke="#6b7a8d" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  </div>
+);
+
+const PlayBox = ({ className = '' }: { className?: string }) => (
+  <div className={`bg-[#3d4a5c] rounded flex items-center justify-center ${className}`}>
+    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+      <div className="w-0 h-0 border-t-[8px] border-b-[8px] border-l-[13px] border-transparent border-l-white ml-1" />
+    </div>
+  </div>
+);
+
+const Window = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 ${className}`}>
+    <div className="bg-[#e8eaed] px-3 py-2 flex items-center gap-2 border-b border-gray-300">
+      <div className="flex gap-1.5">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#bbbfc7]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#bbbfc7]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#bbbfc7]" />
+      </div>
+      <div className="flex-1 bg-white rounded h-3.5 mx-2" />
+    </div>
+    {children}
+  </div>
+);
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
-      {/* Top bar */}
-      <div className="border-b border-border">
-        <div className="container flex items-center justify-between py-4">
-          <a href="tel:+78007001258" className="flex items-center gap-2 text-lg font-bold text-primary">
-            <Icon name="Phone" size={20} />
-            +7 (800) 700-12-58
-          </a>
-          <div className="hidden items-center gap-1.5 text-sm text-muted-foreground md:flex">
-            <Icon name="MapPin" size={16} />
-            г. Ковров, ул. Ватутина, 90
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary text-xs font-bold text-primary transition hover:bg-primary/5">
-              Войти
-            </button>
-            <Button className="hidden rounded-full px-7 py-6 text-base font-bold shadow-lg sm:inline-flex">
-              Записаться на приём
-            </Button>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#9ca3b0] flex items-center justify-center p-8">
+      <div className="grid grid-cols-3 gap-5 max-w-5xl w-full">
 
-      {/* Nav */}
-      <nav className="border-b border-border">
-        <div className="container flex flex-wrap items-center gap-x-8 gap-y-3 py-5">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href="#"
-              className="flex items-center gap-2 text-base font-medium text-foreground/80 transition hover:text-primary"
-            >
-              <Icon name={item.icon} size={18} className="text-primary" />
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      {/* Breadcrumb */}
-      <div className="bg-secondary/60">
-        <div className="container py-4 text-sm font-medium text-primary">Главная</div>
-      </div>
-
-      {/* Hero */}
-      <section className="container grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
-        <div className="animate-fade-in">
-          <h1 className="font-sans text-5xl font-medium leading-tight text-foreground sm:text-6xl">
-            Первая Клиническая
-          </h1>
-          <h2 className="mb-7 font-display text-5xl font-extrabold leading-tight text-primary sm:text-7xl">
-            Платная Поликлиника
-          </h2>
-          <p className="mb-10 max-w-md text-2xl font-semibold leading-snug text-primary/90">
-            Премиальное медицинское обслуживание европейского уровня
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Button className="rounded-full px-9 py-7 text-lg font-bold shadow-xl shadow-primary/20 hover-scale">
-              Записаться на приём
-            </Button>
-            <Button
-              variant="outline"
-              className="rounded-full border-2 border-primary px-9 py-7 text-lg font-bold text-primary hover:bg-primary/5"
-            >
-              О центре
-            </Button>
-          </div>
-        </div>
-
-        <div className="animate-scale-in overflow-hidden rounded-3xl shadow-2xl">
-          <img
-            src="https://cdn.poehali.dev/projects/d5cdecce-90ac-49f6-8f9c-320fa45c1163/bucket/a1371866-68ec-4707-810f-fe53ba0b4d73.png"
-            alt="Здание клиники"
-            className="h-full w-full object-cover"
-          />
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="container grid gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map((f, i) => (
-          <div
-            key={f.title}
-            className="group rounded-3xl border border-border bg-card p-8 transition hover:border-primary hover:shadow-xl"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
-              <Icon name={f.icon} size={28} />
+        {/* 1 — Video hero */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <div className="grid grid-cols-3 gap-2">
+              <PlayBox className="col-span-2 h-24" />
+              <div className="space-y-2">
+                <ImageBox className="h-[44px]" />
+                <ImageBox className="h-[44px]" />
+              </div>
             </div>
-            <h3 className="mb-2 text-xl font-bold text-foreground">{f.title}</h3>
-            <p className="leading-relaxed text-muted-foreground">{f.text}</p>
+            <div className="grid grid-cols-3 gap-2">
+              <Block className="h-6" />
+              <Block className="h-6" />
+              <Block className="h-6" />
+            </div>
+            <div className="space-y-1.5 pt-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-5/6" />
+              <TextLine w="w-4/6" />
+              <TextLine w="w-full" />
+            </div>
+            <Block className="h-6 w-1/2 mx-auto mt-1" />
           </div>
-        ))}
-      </section>
+        </Window>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-secondary/40">
-        <div className="container flex flex-col items-center justify-between gap-4 py-8 text-sm text-muted-foreground md:flex-row">
-          <span className="font-bold text-primary">ПКМЦ — Первый Клинический Медицинский Центр</span>
-          <span>г. Ковров, ул. Ватутина, 90 · +7 (800) 700-12-58</span>
-        </div>
-      </footer>
+        {/* 2 — Search + cards */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <Block className="h-4 w-3/4" />
+            <Block className="h-3 w-1/2" />
+            <div className="flex gap-2 pt-1">
+              <div className="flex-1 h-7 border-2 border-[#3d4a5c] rounded" />
+              <Block className="h-7 w-8" />
+            </div>
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              <ImageBox className="h-14" />
+              <ImageBox className="h-14" />
+              <ImageBox className="h-14" />
+            </div>
+            <Block className="h-1.5 w-full mt-1" />
+            <Block className="h-10 w-full" />
+            <div className="space-y-1 pt-1">
+              <TextLine w="w-2/3" />
+              <TextLine w="w-full" />
+              <TextLine w="w-1/2" />
+            </div>
+          </div>
+        </Window>
+
+        {/* 3 — Slider */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <div className="relative">
+              <ImageBox className="h-24 w-full" />
+              <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white/80 rounded-full flex items-center justify-center text-xs text-gray-600">‹</div>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white/80 rounded-full flex items-center justify-center text-xs text-gray-600">›</div>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[0,1,2].map(i => (
+                <div key={i}>
+                  <Block className="h-12" />
+                  <div className="space-y-1 mt-1">
+                    <TextLine w="w-full" h="h-1.5" />
+                    <TextLine w="w-4/5" h="h-1.5" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2 pt-1">
+              <Block className="h-6 flex-1" />
+              <Block className="h-6 flex-1" />
+              <Block className="h-6 flex-1" />
+            </div>
+          </div>
+        </Window>
+
+        {/* 4 — Article */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <Block className="h-16 w-full" />
+            <Block className="h-4 w-2/3" />
+            <Block className="h-3 w-1/2" />
+            <div className="flex gap-2 pt-1">
+              <Block className="h-5 w-12" />
+              <Block className="h-5 w-16" />
+            </div>
+            <div className="space-y-1.5 pt-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-full" />
+              <TextLine w="w-5/6" />
+            </div>
+            <div className="flex gap-2 items-center pt-1">
+              <ImageBox className="h-10 w-10 shrink-0" />
+              <div className="space-y-1 flex-1">
+                <TextLine w="w-full" h="h-1.5" />
+                <TextLine w="w-3/4" h="h-1.5" />
+                <TextLine w="w-full" h="h-1.5" />
+              </div>
+            </div>
+            <Block className="h-6 w-full" />
+            <div className="flex gap-2">
+              <Block className="h-6 flex-1" />
+              <Block className="h-6 flex-1" />
+              <Block className="h-6 flex-1" />
+            </div>
+          </div>
+        </Window>
+
+        {/* 5 — Map + content */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <Block className="h-4 w-2/3" />
+            <Block className="h-3 w-1/3" />
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="space-y-1.5">
+                <TextLine w="w-full" />
+                <TextLine w="w-4/5" />
+                <TextLine w="w-full" />
+                <TextLine w="w-3/5" />
+                <TextLine w="w-full" />
+                <TextLine w="w-2/3" />
+              </div>
+              <div
+                className="h-24 rounded"
+                style={{ background: 'repeating-conic-gradient(#3d4a5c 0% 25%, #4a5568 0% 50%) 0 0 / 8px 8px' }}
+              />
+            </div>
+            <div className="space-y-1.5 pt-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-5/6" />
+              <TextLine w="w-full" />
+            </div>
+            <div className="flex gap-2 pt-1">
+              <Block className="h-6 flex-1" />
+              <Block className="h-6 w-6" />
+              <Block className="h-6 w-6" />
+              <Block className="h-6 w-6" />
+            </div>
+          </div>
+        </Window>
+
+        {/* 6 — News layout */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <Block className="h-3 w-1/3" />
+            <div className="grid grid-cols-2 gap-2">
+              <ImageBox className="h-20 col-span-2" />
+              <div className="space-y-1.5">
+                <Block className="h-2.5 w-4/5" />
+                <TextLine w="w-full" />
+                <TextLine w="w-4/5" />
+              </div>
+              <div className="space-y-1.5">
+                <Block className="h-2.5 w-4/5" />
+                <TextLine w="w-full" />
+                <TextLine w="w-3/4" />
+              </div>
+            </div>
+            <div className="grid grid-cols-4 gap-1 pt-1">
+              {[0,1,2,3].map(i => <ImageBox key={i} className="h-9" />)}
+            </div>
+            <div className="space-y-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-3/4" />
+            </div>
+            <div className="grid grid-cols-4 gap-1">
+              {[0,1,2,3].map(i => <ImageBox key={i} className="h-9" />)}
+            </div>
+          </div>
+        </Window>
+
+        {/* 7 — Two cols big */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <div className="flex justify-between items-center">
+              <Block className="h-3 w-1/2" />
+              <div className="flex gap-1">
+                <Block className="h-3 w-3" />
+                <Block className="h-3 w-3" />
+                <Block className="h-3 w-3" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <ImageBox className="h-20" />
+              <ImageBox className="h-20" />
+            </div>
+            <div className="grid grid-cols-4 gap-1">
+              {[0,1,2,3].map(i => <ImageBox key={i} className="h-10" />)}
+            </div>
+            <div className="space-y-1 pt-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-5/6" />
+              <TextLine w="w-4/6" />
+            </div>
+            <div className="grid grid-cols-4 gap-1 pt-1">
+              {[0,1,2,3].map(i => <ImageBox key={i} className="h-10" />)}
+            </div>
+          </div>
+        </Window>
+
+        {/* 8 — Grid gallery */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <div className="grid grid-cols-3 gap-1.5" style={{ gridTemplateRows: 'auto auto' }}>
+              <ImageBox className="col-span-2 row-span-2 h-24" />
+              <ImageBox className="h-[44px]" />
+              <ImageBox className="h-[44px]" />
+            </div>
+            <div className="space-y-1 pt-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-4/5" />
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {[0,1,2].map(i => <ImageBox key={i} className="h-11" />)}
+            </div>
+            <div className="space-y-1">
+              <TextLine w="w-full" />
+              <TextLine w="w-3/5" />
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {[0,1,2].map(i => <ImageBox key={i} className="h-11" />)}
+            </div>
+          </div>
+        </Window>
+
+        {/* 9 — Lightbox */}
+        <Window>
+          <div className="p-3 space-y-2">
+            <div className="relative">
+              <div className="grid grid-cols-3 gap-2">
+                <ImageBox className="col-span-1 h-32" />
+                <div className="col-span-2 grid grid-cols-2 gap-1.5">
+                  {[0,1,2,3].map(i => <ImageBox key={i} className="h-[58px]" />)}
+                </div>
+              </div>
+              <div className="absolute left-1 top-1/2 -translate-y-1/2 w-5 h-5 bg-white/80 rounded-full flex items-center justify-center text-xs text-gray-600">‹</div>
+              <div className="absolute right-1 top-1/2 -translate-y-1/2 w-5 h-5 bg-white/80 rounded-full flex items-center justify-center text-xs text-gray-600">›</div>
+            </div>
+            <div className="flex justify-center gap-1.5 pt-1">
+              <div className="w-2 h-2 rounded-full bg-[#3d4a5c]" />
+              <div className="w-2 h-2 rounded-full bg-[#cfd5de]" />
+              <div className="w-2 h-2 rounded-full bg-[#cfd5de]" />
+            </div>
+            <div className="grid grid-cols-4 gap-1.5 pt-1">
+              {[0,1,2,3].map(i => <ImageBox key={i} className="h-10" />)}
+            </div>
+          </div>
+        </Window>
+
+      </div>
     </div>
   );
 };
